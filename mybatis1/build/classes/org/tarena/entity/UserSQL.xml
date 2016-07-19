@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userdemo">
+	
+	<insert id="addUser" parameterType="org.tarena.entity.User"> <!-- 可以理解为2个参数，直接传 -->
+	<!-- 外界通过id_user调用将User传进来，把对象的值提取然后弄到insert -->
+	insert into d_user (name,sex,salary) values(#{name},#{sex},#{salary})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+	delete from d_user where id=#{id}
+	</delete>
+	
+	<update id="update" parameterType="org.tarena.entity.User">
+	update d_user set name=#{name},sex=#{sex},salary=#{salary} where id=#{id}
+	</update>
+		
+	<!-- resultType 每行记录都和user进行映射 -->
+	<select id="findById" parameterType="int" 
+	resultType="org.tarena.entity.User">
+	select * from d_user where id=#{id}
+	</select>
+	
+	<select id="findAll" 
+	resultType="org.tarena.entity.User">
+	select * from d_user 
+	</select>
+	
+	
+</mapper>
